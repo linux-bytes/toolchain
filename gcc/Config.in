@@ -3,7 +3,7 @@
 choice
 	prompt "GCC compiler Version" if TOOLCHAINOPTS
 	default GCC_USE_VERSION_4_8_ARC if arc
-	default GCC_USE_VERSION_5
+	default GCC_USE_VERSION_5_2_LINARO
 	help
 	  Select the version of gcc you wish to use.
 
@@ -17,6 +17,10 @@ choice
 		bool "gcc 5.x"
 		depends on !arc
 
+	config GCC_USE_VERSION_5_2_LINARO
+		select GCC_VERSION_5_2_LINARO
+		bool "gcc 5.2.1"
+		depends on !arc
 endchoice
 
 config GCC_USE_GRAPHITE

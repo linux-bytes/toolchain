@@ -74,7 +74,6 @@ define Host/Prepare
 	$(call Kernel/Prepare/Default)
 	ln -sf linux-$(LINUX_VERSION) $(COMPILE_DIR_TOOLCHAIN)/linux
 	$(SED) 's/@expr length/@-expr length/' $(HOST_BUILD_DIR)/Makefile
-	$(warning 112345678)
 endef
 
 define Host/Configure

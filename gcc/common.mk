@@ -32,6 +32,21 @@ ifeq ($(PKG_VERSION),5.2.0)
   PKG_MD5SUM:=a51bcfeb3da7dd4c623e27207ed43467
 endif
 
+ifeq ($(findstring linaro, $(CONFIG_GCC_VERSION)),linaro)
+    ifeq ($(CONFIG_GCC_VERSION),"linaro-5.2-2015.11-2")
+      PKG_SOURCE_URL:=https://publishing-ap-linaro-org.s3.amazonaws.com/releases/components/toolchain/gcc-linaro/5.2-2015.11-2/
+      PKG_REV:=5.2-2015.11-2
+      REVISION:=2016-11-07
+      PKG_VERSION:=5.2.1
+      PKG_VERSION_MAJOR:=5.2
+      PKG_MD5SUM:=46665e2ed131d6808917b18134ef3095
+      PKG_COMP:=xz
+    endif
+    PKG_SOURCE:=$(PKG_NAME)-linaro-$(PKG_REV).tar.$(PKG_COMP)
+    GCC_DIR:=gcc-linaro-$(PKG_REV)
+    HOST_BUILD_DIR:=$(COMPILE_DIR_TOOLCHAIN)/$(GCC_DIR)
+endif
+
 ifneq ($(CONFIG_GCC_VERSION_4_8_ARC),)
     PKG_VERSION:=4.8.4
     PKG_SOURCE_URL:=https://github.com/foss-for-synopsys-dwc-arc-processors/gcc/archive/arc-2015.06
@@ -101,7 +116,7 @@ GCC_CONFIGURE:= \
 		--target=$(REAL_GNU_TARGET_NAME) \
 		--with-gnu-ld \
 		--enable-target-optspace \
-		--disable-libgomp \
+		--enable-libgomp \
 		--disable-libmudflap \
 		--disable-multilib \
 		--disable-nls \
